@@ -12,6 +12,7 @@
 	<description>Monolith to Microservices via Gateway</description>
 
 	<modules>
+		<module>eureka-server</module>
 		<module>monolith</module>
 		<module>gateway</module>
 		<module>hello</module>

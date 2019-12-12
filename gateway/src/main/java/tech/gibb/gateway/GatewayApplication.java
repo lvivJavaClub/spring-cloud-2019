@@ -18,11 +18,11 @@ public class GatewayApplication {
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
-				.route("fortune_api", p -> p.path("/v2/fortune").and().host("api.monolith.com")
-						.filters(f -> f.setPath("/fortune")
-								.requestRateLimiter().rateLimiter(RedisRateLimiter.class,
-										c -> c.setBurstCapacity(1).setReplenishRate(1))
-								.configure(c -> c.setKeyResolver(exchange -> Mono.just(exchange.getRequest().getHeaders().getFirst("X-Fortune-Key")))))
+				.route("fortune_api", p -> p.path("/fortune")
+//						.filters(f -> f.setPath("/fortune")
+//								.requestRateLimiter().rateLimiter(RedisRateLimiter.class,
+//										c -> c.setBurstCapacity(1).setReplenishRate(1))
+//								.configure(c -> c.setKeyResolver(exchange -> Mono.just(exchange.getRequest().getHeaders().getFirst("X-Fortune-Key")))))
 						.uri("lb://fortune"))
 				.route("fortune_rewrite", p -> p.path("/service/randomfortune")
 						.filters(f -> f.setPath("/fortune")
